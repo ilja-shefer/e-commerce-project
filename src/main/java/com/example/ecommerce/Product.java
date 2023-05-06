@@ -9,18 +9,8 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @SequenceGenerator(
-//            name = "book_sequence",
-//            sequenceName = "book_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = SEQUENCE,
-//            generator = "book_sequence"
-//    )
     @Column(
-            name = "id",
-            updatable = false
+            name = "id"
     )
     private Long id;
 
@@ -41,7 +31,6 @@ public class Product {
 	public Product(String name, double price) {
 		this.name = name;
 		this.price = price;
-		this.id = Long.valueOf(0);
 	}
 
 	@Override
@@ -65,11 +54,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

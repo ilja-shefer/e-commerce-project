@@ -27,17 +27,12 @@ public class Item {
 	public Item(Product product, int quantity) {
 		this.product = product;
 		this.quantity = quantity;
-		//this.id = Long.valueOf(0);
 	}
 
 	@Override
 	public String toString() {
 		return "Item [product=" + product + ", quantity=" + quantity + ", id=" + id + "]";
 	}
-	
-//	public String toString() {
-//		return "Item [product=" + product + ", quantity=" + quantity + "]";
-//	}
 
 	public Product getProduct() {
 		return product;
@@ -55,11 +50,11 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
