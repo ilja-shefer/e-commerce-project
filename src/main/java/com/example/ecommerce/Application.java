@@ -30,10 +30,18 @@ public class Application {
 				cartOfJohn.addItem(item1);
 				cartOfJohn.addItem(new Item(cheese, 2));
 				shoppingCartRepository.save(cartOfJohn);
-				System.out.println("After save: " + cartOfJohn);
+				System.out.println("After save 1: " + cartOfJohn);
 
 //				cartOfJohn.getItems().get(0).setQuantity(128);
 //				shoppingCartRepository.save(cartOfJohn);
+				
+				cartOfJohn.setCustomerName("Robby");
+				shoppingCartRepository.save(cartOfJohn);
+				System.out.println("After save 2: " + cartOfJohn);
+
+				cartOfJohn.removeItem(item1);
+				shoppingCartRepository.save(cartOfJohn);
+				System.out.println("After save 3: " + cartOfJohn);
 			}
 		};
 	}
