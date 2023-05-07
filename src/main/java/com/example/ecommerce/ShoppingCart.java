@@ -15,11 +15,12 @@ public class ShoppingCart {
 
 
     @OneToMany(
+    		mappedBy = "cart",
             orphanRemoval = true,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.EAGER
     )
-
+    //@JoinColumn(name = "shopping_cart_id")
 	private List<Item> items = new ArrayList<>();
 	
 	@Column(
@@ -43,6 +44,16 @@ public class ShoppingCart {
 		this.discount = discount;
 	}
 
+	// Helper method to establish reverse relationship from Item to its Cart parent
+	public void addItem(Item item) {
+		item.setCart(this);
+		items.add(item);
+	}
+	public void removeItem(Item item) {
+		items.remove(item);
+		item.setCart(null);
+	}
+	
 	public List<Item> getItems() {
 		return items;
 	}

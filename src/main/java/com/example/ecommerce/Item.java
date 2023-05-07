@@ -21,7 +21,12 @@ public class Item {
 	private Product product;
 	
 	private int quantity;
+
+	@ManyToOne
+    @JoinColumn(name = "shopping_cart_id")
+    private ShoppingCart cart;
 	
+
 	public Item() {}
 
 	public Item(Product product, int quantity) {
@@ -32,6 +37,14 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [product=" + product + ", quantity=" + quantity + ", id=" + id + "]";
+	}
+
+	public ShoppingCart getCart() {
+		return cart;
+	}
+
+	public void setCart(ShoppingCart cart) {
+		this.cart = cart;
 	}
 
 	public Product getProduct() {

@@ -28,11 +28,16 @@ public class Application {
 				Item item1 = new Item(product2, 4);
 				
 				ShoppingCart cartOfJohn = new ShoppingCart("John Trump", 10.00);
-				cartOfJohn.getItems().add(item1);
+				//cartOfJohn.getItems().add(item1);
+				cartOfJohn.addItem(item1);
+
 				ShoppingCart savedCart = shoppingCartRepository.save(cartOfJohn);
 				System.out.println("After save: " + savedCart);
-				savedCart.getItems().get(0).setQuantity(128);
-				shoppingCartRepository.save(savedCart);
+
+				//savedCart.addItem(item1);
+				//shoppingCartRepository.save(savedCart);
+				//savedCart.getItems().get(0).setQuantity(128);
+				//shoppingCartRepository.save(savedCart);
 			}
 		};
 	}
