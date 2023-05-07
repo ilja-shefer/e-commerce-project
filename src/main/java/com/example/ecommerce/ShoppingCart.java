@@ -39,7 +39,7 @@ public class ShoppingCart {
 
 	public ShoppingCart(String customerName, double discount) {
 		//this.items = items;
-		this.id = Long.valueOf(0);
+		//this.id = Long.valueOf(0);    - this was the problem - manually set incorrect Id!
 		this.customerName = customerName;
 		this.discount = discount;
 	}

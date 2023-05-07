@@ -21,23 +21,19 @@ public class Application {
 			public void run(String... args) throws Exception {
 				Product milk = new Product("milk", 19.99);
 				Product cheese = new Product("cheese", 30.49);
-				//productRepository.saveAll(List.of(milk, cheese));
-				Product product2 = productRepository.save(milk);
-				System.out.println("After save: " + product2);
+				productRepository.saveAll(List.of(milk, cheese));
+				System.out.println("After save milk: " + milk);
 				
-				Item item1 = new Item(product2, 4);
-				
+				Item item1 = new Item(milk, 4);
 				ShoppingCart cartOfJohn = new ShoppingCart("John Trump", 10.00);
-				//cartOfJohn.getItems().add(item1);
+//				cartOfJohn.getItems().add(item1);
 				cartOfJohn.addItem(item1);
+				cartOfJohn.addItem(new Item(cheese, 2));
+				shoppingCartRepository.save(cartOfJohn);
+				System.out.println("After save: " + cartOfJohn);
 
-				ShoppingCart savedCart = shoppingCartRepository.save(cartOfJohn);
-				System.out.println("After save: " + savedCart);
-
-				//savedCart.addItem(item1);
-				//shoppingCartRepository.save(savedCart);
-				//savedCart.getItems().get(0).setQuantity(128);
-				//shoppingCartRepository.save(savedCart);
+//				cartOfJohn.getItems().get(0).setQuantity(128);
+//				shoppingCartRepository.save(cartOfJohn);
 			}
 		};
 	}
