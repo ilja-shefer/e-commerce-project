@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 *.class
 mvn*
+bin/
 
 # eclipse project config files
 /.settings/
