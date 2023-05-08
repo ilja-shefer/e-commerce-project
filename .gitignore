@@ -3,6 +3,13 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.class
+mvn*
+
+# eclipse project config files
+/.settings/
+.classpath 
+.project
 
 ### STS ###
 .apt_generated
