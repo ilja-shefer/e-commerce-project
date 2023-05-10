@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -13,7 +14,8 @@ import javax.persistence.Table;
 @Table(name = "item")
 public class Item {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="item_sequence", sequenceName="item_sequence", allocationSize=1, initialValue=101)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="item_sequence")
     private Long id;
 	
 	@ManyToOne
@@ -22,9 +24,9 @@ public class Item {
 	
 	private int quantity;
 
-	@ManyToOne
-    @JoinColumn(name = "shopping_cart_id")
-    private ShoppingCart cart;
+//	@ManyToOne
+//  @JoinColumn(name = "shopping_cart_id")
+//  private ShoppingCart cart;
 	
 
 	public Item() {}
@@ -39,14 +41,14 @@ public class Item {
 		return "Item [product=" + product + ", quantity=" + quantity + ", id=" + id + "]";
 	}
 
-	public ShoppingCart getCart() {
-		return cart;
-	}
-
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
-	}
-
+//	public ShoppingCart getCart() {
+//		return cart;
+//	}
+//
+//	public void setCart(ShoppingCart cart) {
+//		this.cart = cart;
+//	}
+//
 	public Product getProduct() {
 		return product;
 	}

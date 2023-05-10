@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path="api/v1/shopping_cart")
 public class ShoppingCartController {
 
-	private final ShoppingCartService shoppingCartService;
-	
 	@Autowired
-	public ShoppingCartController(ShoppingCartService shoppingCartService) {
-		this.shoppingCartService = shoppingCartService;
-	}
+	private ShoppingCartService shoppingCartService;
+	
 	@GetMapping
 	public List<ShoppingCart> getAllSoppingCarts() {
 		return shoppingCartService.getShoppingCarts();
@@ -36,7 +33,9 @@ public class ShoppingCartController {
 	@PutMapping("/{id}/item")
     public void addNewItemToShoppingCart(@RequestBody Item item,
                                          @PathVariable("id") Long id) {
-        shoppingCartService.addNewItemToShoppingCart(id, item);
+        System.out.println("id: " + id);
+        System.out.println("item: " + item);
+		ShoppingCart saved = shoppingCartService.addNewItemToShoppingCart(id, item);
     }
 
     @PutMapping("/{id}/item/{itemId}")

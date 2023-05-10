@@ -10,17 +10,18 @@ import javax.persistence.*;
 public class ShoppingCart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="shopping_cart_sequence", sequenceName="shopping_cart_sequence", allocationSize=1, initialValue=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="shopping_cart_sequence")
     private Long id;
 
 
     @OneToMany(
-    		mappedBy = "cart",
+//    		mappedBy = "cart",
             orphanRemoval = true,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.EAGER
     )
-    //@JoinColumn(name = "shopping_cart_id")
+    @JoinColumn(name = "shopping_cart_id")
 	private List<Item> items = new ArrayList<>();
 	
 	@Column(
@@ -38,18 +39,20 @@ public class ShoppingCart {
 	public ShoppingCart () {}
 
 	public ShoppingCart(String customerName, double discount) {
+		//this.items = items;
+		//this.id = Long.valueOf(0);    - this was the problem - manually set incorrect Id!
 		this.customerName = customerName;
 		this.discount = discount;
 	}
 
 	// Helper method to establish reverse relationship from Item to its Cart parent
 	public void addItem(Item item) {
-		item.setCart(this);
+//		item.setCart(this);
 		items.add(item);
 	}
 	public void removeItem(Item item) {
 		items.remove(item);
-		item.setCart(null);
+//		item.setCart(null);
 	}
 	
 	public List<Item> getItems() {

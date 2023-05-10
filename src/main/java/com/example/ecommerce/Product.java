@@ -8,10 +8,9 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(
-            name = "id"
-    )
+    @SequenceGenerator(name="product_sequence", sequenceName="product_sequence", allocationSize=1, initialValue=1001)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="product_sequence")
+    @Column(name = "id")
     private Long id;
 
     @Column(

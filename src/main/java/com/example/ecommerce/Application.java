@@ -15,29 +15,48 @@ public class Application {
 	}
 	
 	@Bean
-	CommandLineRunner clrShoppingCart(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository) {
+	CommandLineRunner clrShoppingCart(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository, ItemRepository itemRepo) {
 		return new CommandLineRunner() {
 			@Override
-			public void run(String... args) throws Exception {
+			public void run(String... args) throws Exception {	
+				// Saving a new shopping cart
 				Product milk = new Product("milk", 19.99);
+				productRepository.save(milk);
+				System.out.println("After save milk: " + milk);
+				
+				Item item1 = new Item(milk, 4);
+				ShoppingCart cart = new ShoppingCart("John Smith", 10.00);
+				cart.addItem(item1);
+				ShoppingCart saved = shoppingCartRepository.save(cart);
+				System.out.println("Cart after save 1: " + saved);
+				
+				
+				// Updating an existing shopping cart
 				Product cheese = new Product("cheese", 30.49);
-				productRepository.saveAll(List.of(milk, cheese));
-//				System.out.println("After save milk: " + milk);
-//				
-//				Item item1 = new Item(milk, 4);
-//				ShoppingCart cartOfJohn = new ShoppingCart("John Trump", 10.00);
-//				cartOfJohn.addItem(item1);
-//				cartOfJohn.addItem(new Item(cheese, 2));
-//				shoppingCartRepository.save(cartOfJohn);
-//				System.out.println("After save 1: " + cartOfJohn);
+				productRepository.save(cheese);
+
+				item1 = new Item(cheese, 2);
+				itemRepo.save(item1);  // It's not clear why it is needed - possibly a Hibernate bug?
+				System.out.println(item1);
+
+				ShoppingCart cart1 = shoppingCartRepository.findAll().get(0);
+				cart1.addItem(item1);
+				saved = shoppingCartRepository.save(cart1);
+				System.out.println("Cart after save 3: " + saved);
+				
+
+//				cart = shoppingCartRepository.findAll().get(0);
+//				cart.getItems().remove(0);
+//				shoppingCartRepository.save(cart);
+//				System.out.println("Cart after save 3: " + cart);
 				
 //				cartOfJohn.setCustomerName("Robby");
 //				shoppingCartRepository.save(cartOfJohn);
-//				System.out.println("After save 2: " + cartOfJohn);
+//				System.out.println("Cart after save 2: " + cartOfJohn);
 //
 //				cartOfJohn.removeItem(item1);
 //				shoppingCartRepository.save(cartOfJohn);
-//				System.out.println("After save 3: " + cartOfJohn);
+//				System.out.println("Cart after save 3: " + cartOfJohn);
 			}
 		};
 	}
